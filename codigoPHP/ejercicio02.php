@@ -11,15 +11,11 @@
             /*  @author Cristian Mateos Vega
             *  @since 18/11/2025
             */
+            require_once '../config/confDBPDO.php';
             require_once '../core/231018libreriaValidacion.php';
 
             //Inicialización de variables
             $entradaOK = true;
-            define("HOST", "10.199.8.248");
-            define("DBNAME", "DBCMVDWESProyectoTema5");
-            define("USERNAME", "userCMVDWESProyectoTema5");
-            define("PASSWORD", "paso");
-            define("DSN", "mysql:host=" . HOST . "; dbname=" . DBNAME);
             $login=null;
             $claveIngresada=null;
             $usuario=null;
