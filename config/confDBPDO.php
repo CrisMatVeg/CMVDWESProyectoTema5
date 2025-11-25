@@ -6,7 +6,7 @@
  */
 
 //DESARROLLO
-        define("HOST", "10.199.8.248");
+        define("HOST", "local.ieslossauces.es");
         define("DBNAME", "DBCMVDWESProyectoTema5");
         define("USERNAME", "userCMVDWESProyectoTema5");
         define("PASSWORD", "paso");
