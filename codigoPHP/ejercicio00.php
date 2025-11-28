@@ -9,33 +9,45 @@
 
     <body>
         <?php
+        session_start();
         /*  @author Cristian Mateos Vega
          *  @since 17/11/2025
          */
         
-        echo '<h1>$_SERVER</h1>';
-        echo '<table><tr><th>Variable $_SERVER</th><th>Valor</th></tr>';
-        foreach ($_SERVER as $clave => $valor) {
-            echo "<tr><th>$$clave</th><td>" . $valor . "</td></tr>";
+        echo '<h1>$_SESSION</h1>';
+        echo '<table><tr><th>Clave</th><th>Valor</th></tr>';
+        foreach ($_SESSION as $clave => $valor) {
+            echo "<tr><th>$clave</th><td>";
+            echo "<pre>";
+            print_r($valor);
+            echo "</pre>";
+            echo "</td></tr>";
         }
         echo '</table>';
-        
+
         echo '<h1>$_COOKIE</h1>';
-        echo '<table><tr><th>Variable $_COOKIE</th><th>Valor</th></tr>';
+        echo '<table><tr><th>Clave</th><th>Valor</th></tr>';
         foreach ($_COOKIE as $clave => $valor) {
-            echo "<tr><th>$$clave</th><td>" . $valor . "</td></tr>";
+            echo "<tr><th>$clave</th><td>" . $valor . "</td></tr>";
+        }
+        echo '</table>';
+
+        echo '<h1>$_SERVER</h1>';
+        echo '<table><tr><th>Clave</th><th>Valor</th></tr>';
+        foreach ($_SERVER as $clave => $valor) {
+            echo "<tr><th>$clave</th><td>" . $valor . "</td></tr>";
         }
         echo '</table>';
         
         echo '<h1>$_REQUEST</h1>';
-        echo '<table><tr><th>Variable $_REQUEST</th><th>Valor</th></tr>';
+        echo '<table><tr><th>Clave</th><th>Valor</th></tr>';
         foreach ($_REQUEST as $clave => $valor) {
             echo "<tr><th>$$clave</th><td>" . $valor . "</td></tr>";
         }
         echo '</table>';
         
         echo '<h1>$_GET</h1>';
-        echo '<table><tr><th>Variable $_GET</th><th>Valor</th></tr>';
+        echo '<table><tr><th>Clave</th><th>Valor</th></tr>';
         foreach ($_GET as $clave => $valor) {
             echo "<tr><th>$$clave</th><td>" . $valor . "</td></tr>";
         }

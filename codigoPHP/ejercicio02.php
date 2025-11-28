@@ -16,7 +16,7 @@
 
             //Inicialización de variables
             $entradaOK = true;
-            $login=null;
+            $nombreUsuario=null;
             $claveIngresada=null;
             $usuario=null;
             $consulta=null;
@@ -27,7 +27,7 @@
             try {
                 $miDB = new PDO(DSN, USERNAME, PASSWORD);
                 $consulta = $miDB->prepare("
-                SELECT * FROM T01_Usuarios WHERE T01_CodUsuario = :login AND T01_Password = SHA2(:password,256)
+                SELECT * FROM T01_Usuarios WHERE T01_CodUsuario = :nombreUsuario AND T01_Password = SHA2(:password,256)
                 ");
             } catch (PDOException $e) {
                 die("Error de conexión: " . $e->getMessage());
@@ -40,11 +40,11 @@
                 echo "Debes autenticarte para continuar.";
                 exit;
             }
-            $login = $_SERVER['PHP_AUTH_USER'];
+            $nombreUsuario = $_SERVER['PHP_AUTH_USER'];
             $claveIngresada = $_SERVER['PHP_AUTH_USER'].$_SERVER['PHP_AUTH_PW'];
 
             // ====== 3. Consultar usuario en la base de datos ======
-            $consulta->execute([':login' => $login, ':password'=>$claveIngresada]);
+            $consulta->execute([':nombreUsuario' => $nombreUsuario, ':password'=>$claveIngresada]);
             $usuario = $consulta->fetchAll(PDO::FETCH_OBJ);
 
             // ====== 4. Validación ======
@@ -61,14 +61,14 @@
             UPDATE T01_Usuarios
             SET T01_NumConexiones = T01_NumConexiones + 1,
                 T01_FechaHoraUltimaConexion = NOW()
-            WHERE T01_CodUsuario = :login AND T01_Password = SHA2(:password,256)
+            WHERE T01_CodUsuario = :nombreUsuario AND T01_Password = SHA2(:password,256)
             ");
-            $consulta2->execute([':login' => $login, ':password' => $claveIngresada]);
+            $consulta2->execute([':nombreUsuario' => $nombreUsuario, ':password' => $claveIngresada]);
 
             $consulta3 = $miDB->prepare("
-                SELECT T01_DescUsuario FROM T01_Usuarios WHERE T01_CodUsuario = :login AND T01_Password = SHA2(:password,256)
+                SELECT T01_DescUsuario FROM T01_Usuarios WHERE T01_CodUsuario = :nombreUsuario AND T01_Password = SHA2(:password,256)
                 ");
-            $consulta3->execute([':login' => $login, ':password' => $claveIngresada]);
+            $consulta3->execute([':nombreUsuario' => $nombreUsuario, ':password' => $claveIngresada]);
             $nombreCompleto =  $consulta3->fetchAll(PDO::FETCH_ASSOC);
             echo "<h1>Bienvenid@, " . $nombreCompleto[0]['T01_DescUsuario'] . "</h1>";
             echo "<p>Has accedido correctamente a la zona protegida.</p>";
